@@ -1,7 +1,5 @@
- def add(x,y):
- sum = x + y 
- return sum 
+#!/usr/bin/python3 
 
-add(5,4)
-
-
+def add(x,y):
+    sum = x + y 
+    return sum 
