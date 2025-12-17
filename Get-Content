@@ -1,0 +1,19 @@
+[xml]$xml = Get-Content "file.rdg"
+
+$groups = $xml.SelectNodes("//*[local-name()='group']") | ForEach-Object {
+
+    # שם הקבוצה
+    $groupName = $_.SelectSingleNode("*[local-name()='prop']/*[local-name()='name']").InnerText.Trim()
+
+    # שמות השרתים
+    $servers = $_.SelectNodes("*[local-name()='server']/*[local-name()='prop']/*[local-name()='name']") |
+               ForEach-Object { $_.InnerText.Trim() }
+
+    [PSCustomObject]@{
+        Group   = $groupName
+        Servers = $servers
+    }
+}
+
+# המרה ל-JSON
+$groups | ConvertTo-Json -Depth 3
