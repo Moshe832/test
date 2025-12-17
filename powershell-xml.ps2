@@ -1,1 +1,7 @@
+[xml]$xml = Get-Content "file.xml"
+
+$xml.SelectNodes("//*[local-name()='Server']") |
+ForEach-Object {
+    $_.SelectSingleNode("*[local-name()='Name']").InnerText
+}
 
